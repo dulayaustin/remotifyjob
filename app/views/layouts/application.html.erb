@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<html class="h-full bg-gray-900">
   <head>
     <title><%= content_for(:title) || "Remotifyjob" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -20,10 +21,14 @@
     <%# Includes all stylesheet files in app/views/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= javascript_include_tag "application",
+    "data-turbo-track": "reload",
+    type: "module" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+  <body class="h-full">
     <%= yield %>
   </body>
 </html>
