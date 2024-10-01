@@ -1,0 +1,9 @@
+<div data-toggle-target="toggleable" class="hidden md:hidden" id="mobile-menu">
+  <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+    <%= render "nav/links" %>
+  </div>
+
+  <% if authenticated? %>
+    <%= render "nav/mobile/user_menu" %>
+  <% end %>
+</div>
