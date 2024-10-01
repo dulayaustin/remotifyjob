@@ -13,6 +13,21 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password) }
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
+    it { should accept_nested_attributes_for(:account) }
+
+    it "is valid when password and confirm password matches" do
+      user = User.new(password: "password", confirm_password: "password")
+      user.valid?
+
+      expect(user.errors.full_messages).to_not include("Password does not match")
+    end
+
+    it "is invalid when password and confirm password does not match" do
+      user = User.new(password: "password", confirm_password: "incorrect_password")
+      user.valid?
+
+      expect(user.errors.full_messages).to include("Password does not match")
+    end
   end
 
   describe "associations" do

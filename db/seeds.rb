@@ -11,4 +11,4 @@
 account = Account.find_or_create_by!(name: "Sample Account")
 
 user = User.find_by(email_address: "test@example.com")
-User.create!(email_address: "test@example.com", account: account, first_name: "Test", last_name: "Example", password: "password") unless user.present?
+User.create!(email_address: "test@example.com", account: account, first_name: "Test", last_name: "Example", password: "password", confirm_password: "password") unless user.present?

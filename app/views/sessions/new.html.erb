@@ -1,10 +1,5 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <!-- img class="mx-auto h-10 w-auto"
-    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-    alt="Your Company" -->
     <h2
       class="
         md:mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white
@@ -57,10 +52,9 @@
 
     <p class="mt-10 text-center text-sm text-gray-400">
       Not a member?
-      <a
-        href="#"
-        class="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
-      >Sign up a free account</a>
+      <%= link_to "Sign up for free",
+      new_registration_path,
+      class: "font-semibold leading-6 text-indigo-400 hover:text-indigo-300" %>
     </p>
   </div>
 </div>
