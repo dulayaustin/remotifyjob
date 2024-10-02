@@ -33,11 +33,11 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_url
+      redirect_to new_session_url, alert: "Requires to Sign in first"
     end
 
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
+      session.delete(:return_to_after_authenticating) || dahsboard_url
     end
 
 

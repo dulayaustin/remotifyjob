@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  resources :registrations, only: [ :new, :create ]
-  resource :session, only: [ :new, :create, :destroy ]
-  resources :passwords, param: :token
-  get "home/index"
+  get "dashboard", to: "dashboard#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,4 +12,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  resources :registrations, only: [ :new, :create ]
+  resource :session, only: [ :new, :create, :destroy ]
+  resources :passwords, param: :token
 end
