@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  attr_accessor :confirm_password
-
   belongs_to :account
   has_many :sessions, dependent: :destroy
 
@@ -10,8 +8,8 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-  validates :email_address, presence: true, uniqueness: true, format: URI::MailTo::EMAIL_REGEXP
+  validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates_with PasswordValidator
+  validates :password, presence: true
 end

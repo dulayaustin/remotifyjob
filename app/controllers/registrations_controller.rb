@@ -8,12 +8,13 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      start_new_session_for user
-      redirect_to after_authentication_url
+    user_form = UserForm.new(user_params)
+
+    if user_form.persist
+      start_new_session_for user_form.record
+      redirect_to after_authentication_url, notice: "Successfully sign up"
     else
-      redirect_to new_registration_url, alert: user.errors.full_messages.to_sentence
+      redirect_to new_registration_url, alert: user_form.errors.full_messages.to_sentence
     end
   end
 
