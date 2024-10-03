@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
 
     if user_form.persist
       start_new_session_for user_form.record
-      redirect_to after_authentication_url, notice: "Successfully sign up"
+      redirect_to after_authentication_url, notice: "Signed up successfully."
     else
       redirect_to new_registration_url, alert: user_form.errors.full_messages.to_sentence
     end

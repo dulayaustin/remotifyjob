@@ -21,14 +21,14 @@ RSpec.describe "Registrations", type: :system do
         click_button "Sign up"
       }.to change(User, :count).by(+1)
 
-      expect(page).to have_content "Successfully sign up"
+      expect(page).to have_content "Signed up successfully."
       expect(current_path).to eq dashboard_path
       expect(User.first.account.name).to eq "Sample Company"
     end
   end
 
   context "signing up got errors" do
-    it "is invalid when all fields are blank" do
+    it "is invalid when all required fields are blank" do
       fill_in "First name", with: ""
       fill_in "Last name", with: ""
       fill_in "Email address", with: ""
@@ -46,7 +46,7 @@ RSpec.describe "Registrations", type: :system do
       fill_in "Confirm password", with: "incorrect_password"
       click_button "Sign up"
 
-      expect(page).to have_content "Password does not match"
+      expect(page).to have_css("#flash-container", text: "Password does not match")
       expect(current_path).to eq new_registration_path
     end
 
@@ -54,7 +54,7 @@ RSpec.describe "Registrations", type: :system do
       fill_in "Password", with: "test.com"
       click_button "Sign up"
 
-      expect(page).to have_content "Email address is invalid"
+      expect(page).to have_css("#flash-container", text: "Email address is invalid")
       expect(current_path).to eq new_registration_path
     end
   end
