@@ -37,7 +37,7 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_url, alert: "Requires to Sign in first"
+      redirect_to new_session_url, alert: "Requires to sign in."
     end
 
     def after_authentication_url
@@ -59,6 +59,6 @@ module Authentication
 
     def restrict_authenticated_redirection
       resume_session
-      redirect_to root_url, alert: "Unauthorized access" if authenticated?
+      redirect_to root_url, alert: "Unauthorized access." if authenticated?
     end
 end
