@@ -1,0 +1,17 @@
+button {
+  .show-when-enabled {
+    @apply block;
+  }
+  .show-when-disabled {
+    @apply hidden;
+  }
+
+  &[disabled] {
+    .show-when-enabled {
+      @apply hidden;
+    }
+    .show-when-disabled {
+      @apply block;
+    }
+  }
+}
