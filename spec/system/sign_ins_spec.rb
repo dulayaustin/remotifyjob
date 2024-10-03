@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Sign ups", type: :system do
+RSpec.describe "Sign ins", type: :system do
   let!(:user) { FactoryBot.create(:user) }
 
   it "is successfully authenticated" do
