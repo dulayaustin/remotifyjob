@@ -19,4 +19,6 @@ class Job < ApplicationRecord
     contract: "contract",
     internship: "internship"
   }
+
+  has_rich_text :description
 end
