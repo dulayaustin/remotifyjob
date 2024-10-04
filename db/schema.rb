@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_30_160145) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_04_181643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,6 +18,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_30_160145) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "title"
+    t.string "location"
+    t.string "status", default: "open", null: false
+    t.string "job_type", default: "full_time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_jobs_on_account_id"
+    t.index ["job_type"], name: "index_jobs_on_job_type"
+    t.index ["status"], name: "index_jobs_on_status"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -41,6 +54,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_30_160145) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "jobs", "accounts"
   add_foreign_key "sessions", "users"
   add_foreign_key "users", "accounts"
 end
