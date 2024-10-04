@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :job do
-    account { nil }
-    title { "MyString" }
-    location { "MyString" }
-    status { "MyString" }
-    job_type { "MyString" }
+    association :account
+
+    title { Faker::Job.title }
+    location { Faker::Address.country }
   end
 end
