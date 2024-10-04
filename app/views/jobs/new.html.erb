@@ -1,0 +1,80 @@
+<div class="flex min-h-full flex-col justify-center px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= form_with model: @job, id: "job-form" do |form| %>
+      <div class="space-y-12">
+        <div class="border-b border-white/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-white">Create a job</h2>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="col-span-full">
+              <%= form.label :title, class: "block text-sm font-medium leading-6 text-white" %>
+              <div class="mt-2">
+                <%= form.text_field :title, class: "
+                    block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1
+                    ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500
+                    sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+
+            <div class="col-span-full">
+              <%= form.label :description, class: "block text-sm font-medium leading-6 text-white" %>
+              <div class="mt-2">
+                <%= form.rich_text_area :description, class: "
+                    block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1
+                    ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500
+                    sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+
+            <div class="col-span-full">
+              <%= form.label :location, class: "block text-sm font-medium leading-6 text-white" %>
+              <div class="mt-2">
+                <%= form.text_field :location, class: "
+                    block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1
+                    ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500
+                    sm:text-sm sm:leading-6" %>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <%= form.label :status, class: "block text-sm font-medium leading-6 text-white " %>
+              <div class="mt-2">
+                <%= form.select :status, 
+                  options_for_select(Job.statuses.map{ |key, _value| [key.humanize, key] }, form.object.status), {}, 
+                  { class: "
+                    block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1
+                    ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500
+                    sm:text-sm sm:leading-6 [&_*]:text-black" } %>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <%= form.label :job_type, class: "block text-sm font-medium leading-6 text-white " %>
+              <div class="mt-2">
+                <%= form.select :job_type, 
+                  options_for_select(Job.job_types.map{ |key, _value| [key.humanize, key] }, form.object.job_type), {}, 
+                  { class: "
+                    block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1
+                    ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500
+                    sm:text-sm sm:leading-6 [&_*]:text-black" } %>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-end gap-x-6">
+
+        <%= link_to "Cancel", jobs_path, class: "text-sm font-semibold leading-6 text-white" %>
+        <%= form.button class: "
+            rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm
+            hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2
+            focus-visible:outline-offset-2 focus-visible:outline-indigo-500" do %>
+          <span class="show-when-enabled">Save</span>
+          <span class="show-when-disabled">Saving...</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
