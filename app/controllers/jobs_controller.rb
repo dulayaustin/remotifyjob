@@ -22,9 +22,13 @@ class JobsController < ApplicationController
   # POST /jobs or /jobs.json
   def create
     @job = Job.new(job_params)
+    @job.account = current_account
 
     respond_to do |format|
       if @job.save
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend("jobs", partial: "jobs/job", locals: { job: @job })
+        end
         format.html { redirect_to @job, notice: "Job was successfully created." }
         format.json { render :show, status: :created, location: @job }
       else
@@ -65,6 +69,6 @@ class JobsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def job_params
-      params.expect(job: [ :account_id, :title, :location, :status, :job_type ])
+      params.expect(job: [ :title, :description, :location, :status, :job_type ])
     end
 end

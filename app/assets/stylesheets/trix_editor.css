@@ -1,0 +1,7 @@
+.trix-button-row {
+  .trix-button-group {
+    .trix-button {
+      @apply bg-transparent invert;
+    }
+  }
+}
