@@ -6,7 +6,7 @@ RSpec.describe "Jobs", type: :system do
     let!(:account) { user.account }
 
     describe "creating a job" do
-      it "is a success" do
+      it "is a success", js: true do
         sign_in user
         visit jobs_path
 
@@ -18,9 +18,22 @@ RSpec.describe "Jobs", type: :system do
           select "Open", from: "job_status"
           select "Full time", from: "job_job_type"
           click_button "Save"
-        }.to change(account.jobs, :count).by(+1)
 
-        expect(page).to have_css("#flash-container", text: "Job was successfully created.")
+          expect(page).to have_css("#jobs", text: "Test job")
+        }.to change(account.jobs, :count).by(+1)
+      end
+
+      it "got errors", js: true do
+        sign_in user
+        visit jobs_path
+
+        click_link "Create a job"
+        fill_in "Title", with: ""
+        find("#job_description").click.set("")
+        fill_in "Location", with: ""
+        click_button "Save"
+
+        expect(page).to have_content("can't be blank")
       end
     end
   end

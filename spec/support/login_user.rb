@@ -5,6 +5,8 @@ module LoginUser
     fill_in "Email address", with: user.email_address
     fill_in "Password", with: user.password
     click_button "Sign in"
+
+    sleep 1 # To use `visit path_name` after this method
   end
 end
 
