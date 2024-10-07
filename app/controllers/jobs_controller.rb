@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: %i[ show edit update destroy ]
+  before_action :ensure_frame_response, only: %i[ new edit ]
 
   # GET /jobs or /jobs.json
   def index
