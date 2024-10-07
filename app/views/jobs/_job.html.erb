@@ -1,27 +1,24 @@
-<div id="<%= dom_id job %>">
-  <p>
-    <strong>Account:</strong>
-    <%= job.account_id %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= job.title %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= job.location %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= job.status %>
-  </p>
-
-  <p>
-    <strong>Job type:</strong>
-    <%= job.job_type %>
-  </p>
-
-</div>
+<tr id="<%= dom_id job %>">
+  <td
+    class="
+      whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0
+    "
+  ><%= job.title %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.location %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.status %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.job_type %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.account.name %></td>
+  <td
+    class="
+      relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0
+    "
+  >
+    <%= link_to edit_job_path(job), data: { turbo_frame: "modal"}, class: "text-indigo-400 hover:text-indigo-300" do %>
+      Edit
+      <span class="sr-only">
+        ,
+        <%= job.title %>
+      </span>
+    <% end %>
+  </td>
+</tr>

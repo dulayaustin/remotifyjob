@@ -36,5 +36,40 @@ RSpec.describe "Jobs", type: :system do
         expect(page).to have_content("can't be blank")
       end
     end
+
+    describe "editing a job" do
+      let!(:job) {
+        FactoryBot.create(:job,
+          account: account,
+          title: "Test job")
+      }
+
+      it "is a success", js: true do
+        sign_in user
+        visit jobs_path
+
+        find("#job_#{job.id}").click_link "Edit"
+        fill_in "Title", with: "Edited test job"
+        find('#job_description').click.set('For testing purposes only')
+        select "Draft", from: "job_status"
+        select "Part time", from: "job_job_type"
+        fill_in "Location", with: "USA"
+        click_button "Save"
+
+        expect(page).to have_css("#jobs", text: "Edited test job")
+      end
+
+      it "got errors", js: true do
+        sign_in user
+        visit jobs_path
+
+        find("#job_#{job.id}").click_link "Edit"
+        fill_in "Title", with: ""
+        fill_in "Location", with: ""
+        click_button "Save"
+
+        expect(page).to have_content "can't be blank"
+      end
+    end
   end
 end

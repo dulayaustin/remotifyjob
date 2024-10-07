@@ -23,10 +23,34 @@
 </div>
 
 <div id="jobs">
-  <% @jobs.each do |job| %>
-    <%= render job %>
-    <p>
-      <%= link_to "Show this job", job %>
-    </p>
-  <% end %>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="min-w-full divide-y divide-gray-700">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                class="
+                  py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0
+                "
+              >Title</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Location</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Job Type</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Account</th>
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800">
+            <% @jobs.each do |job| %>
+              <%= render job %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
