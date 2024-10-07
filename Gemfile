@@ -64,3 +64,5 @@ group :development do
   gem "shoulda-matchers"
   gem "webdrivers", "~> 5.3", ">= 5.3.1", require: false
 end
+
+gem "view_component"
