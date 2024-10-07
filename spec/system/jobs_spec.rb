@@ -19,7 +19,8 @@ RSpec.describe "Jobs", type: :system do
           select "Full time", from: "job_job_type"
           click_button "Save"
 
-          expect(page).to have_css("#jobs", text: "Test job")
+
+          expect(page).to have_css("#jobs_container", text: "Test job")
         }.to change(account.jobs, :count).by(+1)
       end
 
@@ -56,7 +57,7 @@ RSpec.describe "Jobs", type: :system do
         fill_in "Location", with: "USA"
         click_button "Save"
 
-        expect(page).to have_css("#jobs", text: "Edited test job")
+        expect(page).to have_css("#jobs_container", text: "Edited test job")
       end
 
       it "got errors", js: true do

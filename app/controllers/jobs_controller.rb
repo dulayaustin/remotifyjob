@@ -28,7 +28,7 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.save
         format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend("jobs", partial: "jobs/job", locals: { job: @job })
+          render turbo_stream: turbo_stream.prepend("jobs_container", partial: "jobs/job", locals: { job: @job })
         end
         format.html { redirect_to @job, notice: "Job was successfully created." }
         format.json { render :show, status: :created, location: @job }
