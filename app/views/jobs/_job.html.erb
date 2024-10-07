@@ -5,8 +5,8 @@
     "
   ><%= job.title %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.location %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.status %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.job_type %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.status.humanize %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.job_type.humanize %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.account.name %></td>
   <td
     class="
