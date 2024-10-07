@@ -31,10 +31,8 @@ class JobsController < ApplicationController
           render turbo_stream: turbo_stream.prepend("jobs_container", partial: "jobs/job", locals: { job: @job })
         end
         format.html { redirect_to @job, notice: "Job was successfully created." }
-        format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,10 +45,8 @@ class JobsController < ApplicationController
           render turbo_stream: turbo_stream.replace("job_#{@job.id}", partial: "jobs/job", locals: { job: @job })
         end
         format.html { redirect_to @job, notice: "Job was successfully updated." }
-        format.json { render :show, status: :ok, location: @job }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
   end
