@@ -72,5 +72,25 @@ RSpec.describe "Jobs", type: :system do
         expect(page).to have_content "can't be blank"
       end
     end
+
+    describe "deleting a job" do
+      let!(:job) {
+        FactoryBot.create(:job,
+          account: account,
+          title: "Test job")
+      }
+
+      it "is a success", js: true do
+        sign_in user
+        visit jobs_path
+
+        expect {
+          find("#job_#{job.id}").click_link "Delete"
+          accept_alert
+
+          expect(page).to_not have_css("#jobs_container", text: "Test job")
+        }.to change(account.jobs, :count).by(-1)
+      end
+    end
   end
 end
