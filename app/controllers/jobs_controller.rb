@@ -37,7 +37,10 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.update(job_params)
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(@job, partial: "jobs/job", locals: { job: @job })
+          render turbo_stream: [
+            turbo_stream.replace("job_#{@job.id}_row", partial: "jobs/job", locals: { job: @job }),
+            turbo_stream.replace("job_#{@job.id}_detail", partial: "jobs/details", locals: { job: @job })
+          ]
         end
         format.html { redirect_to @job, notice: "Job was successfully updated." }
       else
@@ -51,7 +54,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.remove(@job)
+        render turbo_stream: turbo_stream.remove("job_#{@job.id}_row")
       end
       format.html { redirect_to jobs_path, status: :see_other, notice: "Job was successfully destroyed." }
     end

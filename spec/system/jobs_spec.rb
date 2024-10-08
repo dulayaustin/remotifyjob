@@ -49,7 +49,7 @@ RSpec.describe "Jobs", type: :system do
         sign_in user
         visit jobs_path
 
-        find("#job_#{job.id}").click_link "Edit"
+        find("#job_#{job.id}_row").click_link "Edit"
         fill_in "Title", with: "Edited test job"
         find('#job_description').click.set('For testing purposes only')
         select "Draft", from: "job_status"
@@ -64,7 +64,7 @@ RSpec.describe "Jobs", type: :system do
         sign_in user
         visit jobs_path
 
-        find("#job_#{job.id}").click_link "Edit"
+        find("#job_#{job.id}_row").click_link "Edit"
         fill_in "Title", with: ""
         fill_in "Location", with: ""
         click_button "Save"
@@ -85,7 +85,7 @@ RSpec.describe "Jobs", type: :system do
         visit jobs_path
 
         expect {
-          find("#job_#{job.id}").click_link "Delete"
+          find("#job_#{job.id}_row").click_link "Delete"
           accept_alert
 
           expect(page).to_not have_css("#jobs_container", text: "Test job")

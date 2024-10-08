@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Job, type: :model do
+  pending "add remote/on-site/hybrid, salary-range:string, closing_date:datetime columns"
+
   describe "validations" do
     it { should validate_presence_of(:account_id) }
     it { should validate_presence_of(:title) }
