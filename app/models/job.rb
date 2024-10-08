@@ -21,4 +21,6 @@ class Job < ApplicationRecord
   }
 
   has_rich_text :description
+
+  scope :within_account, ->(account) { where(jobs: { account_id: account.id }) }
 end

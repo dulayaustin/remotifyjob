@@ -92,5 +92,50 @@ RSpec.describe "Jobs", type: :system do
         }.to change(account.jobs, :count).by(-1)
       end
     end
+
+    describe "viewing jobs list" do
+      let!(:job) {
+        FactoryBot.create(:job,
+          account: account,
+          title: "Job within account")
+      }
+      let!(:job_from_other_account) {
+        FactoryBot.create(:job, title: "Job from other account")
+      }
+
+      it "should only display jobs within account" do
+        sign_in user
+        visit jobs_path
+
+        expect(page).to have_css("#jobs_container", text: "Job within account")
+        expect(page).to_not have_css("#jobs_container", text: "Job from other account")
+      end
+    end
+
+    describe "viewing a job" do
+      let!(:job) {
+        FactoryBot.create(:job,
+          account: account,
+          title: "Job within account")
+      }
+      let!(:job_from_other_account) {
+        FactoryBot.create(:job, title: "Job from other account")
+      }
+
+      it "can be viewed when a job is within account" do
+        sign_in user
+        visit job_path(job)
+
+        expect(page).to have_text("Job within account")
+      end
+
+      it "cannot view a job from other account" do
+        sign_in user
+        visit job_path(job_from_other_account)
+
+        expect(current_path).to eq jobs_path
+        expect(page).to have_css("#flash-container", text: "Unauthorized access.")
+      end
+    end
   end
 end

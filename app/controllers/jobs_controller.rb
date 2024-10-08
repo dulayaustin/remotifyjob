@@ -1,9 +1,10 @@
 class JobsController < ApplicationController
   before_action :set_job, only: %i[ show edit update destroy ]
   before_action :ensure_frame_response, only: %i[ new edit ]
+  before_action :authorize_access, only: %i[ show ]
 
   def index
-    @jobs = Job.all
+    @jobs = Job.within_account(current_account)
   end
 
   def show
@@ -63,5 +64,9 @@ class JobsController < ApplicationController
 
     def job_params
       params.expect(job: [ :title, :description, :location, :status, :job_type ])
+    end
+
+    def authorize_access
+      redirect_to jobs_path, alert: "Unauthorized access." if @job.account != current_account
     end
 end
