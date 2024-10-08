@@ -3,25 +3,54 @@
     class="
       whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0
     "
-  ><%= job.title %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.location %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.status.humanize %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.job_type.humanize %></td>
-  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300"><%= job.account.name %></td>
+  >
+    <%= job.title %>
+    <dl class="font-normal lg:hidden">
+      <dt class="sr-only">Location</dt>
+      <dd class="mt-1 truncate text-gray-300"><%= job.location %></dd>
+      <dt class="sr-only">Job Type</dt>
+      <dd class="mt-1 truncate text-gray-300"><%= job.job_type.humanize %></dd>
+      <dt class="sr-only">Account</dt>
+      <dd class="mt-1 truncate text-gray-300"><%= job.account.name %></dd>
+    </dl>
+  </td>
+  <td
+    class="
+      hidden whitespace-nowrap px-3 py-4 text-sm text-gray-300 lg:table-cell
+    "
+  ><%= job.location %></td>
+  <td
+    class="
+      hidden whitespace-nowrap px-3 py-4 text-sm text-gray-300 lg:table-cell
+    "
+  ><%= job.job_type.humanize %></td>
+  <td
+    class="
+      hidden whitespace-nowrap px-3 py-4 text-sm text-gray-300 lg:table-cell
+    "
+  ><%= job.account.name %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+    <span
+      class="
+        inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1
+        ring-inset <%= job_status_color(job.status) %>
+      "
+    >
+      <%= job.status.humanize %>
+    </span>
+  </td>
   <td
     class="
       relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0
     "
   >
     <%= link_to job_path(job), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this job?" }, class: "text-rose-400 hover:text-rose-300" do %>
-      Delete
+      <span class="sr-only">Delete</span>
+      <%= inline_svg_tag "trash.svg", class: "h-5 w-5 inline-block" %>
     <% end %>
-    <%= link_to edit_job_path(job), data: { turbo_frame: "modal"}, class: "text-indigo-400 hover:text-indigo-300 ml-1" do %>
-      Edit
-      <span class="sr-only">
-        ,
-        <%= job.title %>
-      </span>
+    <%= link_to edit_job_path(job), data: { turbo_frame: "modal" }, class: "text-indigo-400 hover:text-indigo-300 ml-1" do %>
+      <span class="sr-only">Edit</span>
+      <%= inline_svg_tag "pencil-square.svg", class: "h-5 w-5 inline-block" %>
     <% end %>
 
   </td>

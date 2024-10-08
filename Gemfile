@@ -66,3 +66,4 @@ group :development do
 end
 
 gem "view_component"
+gem "inline_svg"
