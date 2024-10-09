@@ -1,0 +1,33 @@
+<% if breadcrumbs.any? %>
+  <div>
+    <nav class="sm:hidden" aria-label="Back">
+      <%= link_to breadcrumbs[-2].dig(:path), class: "flex items-center text-sm font-medium text-gray-400 hover:text-gray-200" do %>
+        <%= inline_svg_tag "chevron-left.svg",
+        class: "-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-500" %>
+        Back
+      <% end %>
+    </nav>
+    <nav class="hidden sm:flex" aria-label="Breadcrumb">
+      <ol role="list" class="flex items-center space-x-4">
+        <% breadcrumbs.each_with_index do |breadcrumb, index| %>
+          <li>
+            <% if index == 0 %>
+              <div class="flex">
+                <%= link_to breadcrumb.dig(:title),
+                breadcrumb.dig(:path),
+                class: "text-sm font-medium text-gray-400 hover:text-gray-200" %>
+              </div>
+            <% else %>
+              <div class="flex items-center">
+                <%= inline_svg_tag "chevron-right.svg", class: "h-5 w-5 flex-shrink-0 text-gray-500" %>
+                <%= link_to breadcrumb.dig(:title),
+                breadcrumb.dig(:path),
+                class: "ml-4 text-sm font-medium text-gray-400 hover:text-gray-200" %>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    </nav>
+  </div>
+<% end %>
