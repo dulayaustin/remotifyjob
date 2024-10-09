@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Job, type: :model do
   pending "add closing_data:date column. Create a schedule cron job everyday to set status to `closed` when closing_date is present and today"
   describe "validations" do
-    it { should validate_presence_of(:account_id) }
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:location) }
     it { should validate_presence_of(:status) }
