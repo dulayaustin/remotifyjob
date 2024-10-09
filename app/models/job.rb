@@ -1,11 +1,15 @@
 class Job < ApplicationRecord
   belongs_to :account
 
+  has_many :applicants, dependent: :destroy
+
   validates :title, presence: true
   validates :location, presence: true
   validates :status, presence: true
   validates :job_type, presence: true
   validates :location_type, presence: true
+
+  has_rich_text :description
 
   enum :status, {
     draft: "draft",
@@ -25,8 +29,6 @@ class Job < ApplicationRecord
     hybrid: "hybrid",
     on_site: "on_site"
   }
-
-  has_rich_text :description
 
   scope :within_account, ->(account) { where(jobs: { account_id: account.id }) }
 end

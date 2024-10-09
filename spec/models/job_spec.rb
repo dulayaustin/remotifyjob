@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Job, type: :model do
   pending "add closing_data:date column. Create a schedule cron job everyday to set status to `closed` when closing_date is present and today"
+
+  describe "associations" do
+    it { should belong_to(:account) }
+    it { should have_many(:applicants).dependent(:destroy) }
+  end
+
   describe "validations" do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:location) }
@@ -39,9 +45,5 @@ RSpec.describe Job, type: :model do
           on_site: 'on_site'
         ).backed_by_column_of_type(:string)
     end
-  end
-
-  describe "associations" do
-    it { should belong_to(:account) }
   end
 end
