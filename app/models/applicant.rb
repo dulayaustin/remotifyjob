@@ -21,4 +21,8 @@ class Applicant < ApplicationRecord
     active: "active",
     inactive: "inactive"
   }
+
+  def name
+    [ first_name, last_name ].join(" ")
+  end
 end

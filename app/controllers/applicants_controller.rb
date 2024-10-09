@@ -20,6 +20,9 @@ class ApplicantsController < ApplicationController
 
     respond_to do |format|
       if @applicant.save
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend("applicants_container", partial: "applicants/applicant", locals: { applicant: @applicant })
+        end
         format.html { redirect_to @applicant, notice: "Applicant was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,6 +54,6 @@ class ApplicantsController < ApplicationController
     end
 
     def applicant_params
-      params.expect(applicant: [ :first_name, :last_name, :email, :phone, :stage, :status, :job_id ])
+      params.expect(applicant: [ :first_name, :last_name, :email_address, :phone, :stage, :status, :resume, :job_id ])
     end
 end

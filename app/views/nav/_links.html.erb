@@ -7,3 +7,6 @@ aria_current: "page" %>
 <%= link_to "Jobs",
 jobs_path,
 class: "nav-link #{"active" if request.path == "/jobs"}" %>
+<%= link_to "Applicants",
+applicants_path,
+class: "nav-link #{"active" if request.path == "/applicants"}" %>

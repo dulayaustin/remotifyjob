@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :applicants
   get "dashboard", to: "dashboard#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -18,4 +17,5 @@ Rails.application.routes.draw do
   resource :session, only: [ :new, :create, :destroy ]
   resources :passwords, param: :token
   resources :jobs
+  resources :applicants
 end

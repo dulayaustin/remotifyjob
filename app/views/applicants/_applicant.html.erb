@@ -1,17 +1,12 @@
 <div id="<%= dom_id applicant %>">
   <p>
-    <strong>First name:</strong>
-    <%= applicant.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= applicant.last_name %>
+    <strong>Name</strong>
+    <%= applicant.name %>
   </p>
 
   <p>
     <strong>Email:</strong>
-    <%= applicant.email %>
+    <%= applicant.email_address %>
   </p>
 
   <p>
@@ -34,4 +29,9 @@
     <%= applicant.job_id %>
   </p>
 
+  <% if applicant.resume.attached? %>
+    <div class="w-full">
+      <iframe src="<%= url_for(applicant.resume) %>" width="100%" height="1000"></iframe>
+    </div>
+  <% end %>
 </div>
