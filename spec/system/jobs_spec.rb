@@ -15,8 +15,10 @@ RSpec.describe "Jobs", type: :system do
           fill_in "Title", with: "Test job"
           find("#job_description").click.set("For testing purposes only")
           fill_in "Location", with: "USA"
+          select "Remote", from: "job_location_type"
+          fill_in "Salary budget", with: "$100k - $120k annually"
           select "Open", from: "job_status"
-          select "Full time", from: "job_job_type"
+          select "Full-time", from: "job_job_type"
           click_button "Save"
 
 
@@ -52,9 +54,11 @@ RSpec.describe "Jobs", type: :system do
         find("#job_#{job.id}_row").click_link "Edit"
         fill_in "Title", with: "Edited test job"
         find('#job_description').click.set('For testing purposes only')
-        select "Draft", from: "job_status"
-        select "Part time", from: "job_job_type"
         fill_in "Location", with: "USA"
+        select "On-site", from: "job_location_type"
+        fill_in "Salary budget", with: "$80k/yr - $100k/yr "
+        select "Draft", from: "job_status"
+        select "Part-time", from: "job_job_type"
         click_button "Save"
 
         expect(page).to have_css("#jobs_container", text: "Edited test job")
@@ -108,6 +112,12 @@ RSpec.describe "Jobs", type: :system do
         visit jobs_path
 
         expect(page).to have_css("#jobs_container", text: "Job within account")
+      end
+
+      it "should not display jobs from other account" do
+        sign_in user
+        visit jobs_path
+
         expect(page).to_not have_css("#jobs_container", text: "Job from other account")
       end
     end
@@ -122,7 +132,7 @@ RSpec.describe "Jobs", type: :system do
         FactoryBot.create(:job, title: "Job from other account")
       }
 
-      it "can be viewed when a job is within account" do
+      it "can be viewed when the job is within account" do
         sign_in user
         visit job_path(job)
 

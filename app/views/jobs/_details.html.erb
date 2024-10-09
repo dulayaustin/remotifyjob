@@ -16,21 +16,30 @@
         <div class="mt-2 flex items-center text-sm text-gray-300">
           <%= inline_svg_tag "briefcase.svg",
           class: "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500" %>
-          <%= job.job_type.humanize %>
+          <%= job.job_type.dasherize.humanize %>
         </div>
         <div class="mt-2 flex items-center text-sm text-gray-300">
           <%= inline_svg_tag "map-pin.svg",
           class: "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500" %>
-          Remote
+          <%= job.location %>
+          (<%= job.location_type.dasherize.humanize %>)
         </div>
+        <% if job.salary_budget.present? %>
+          <div class="mt-2 flex items-center text-sm text-gray-300">
+            <%= inline_svg_tag "banknotes.svg",
+            class: "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500" %>
+            <%= job.salary_budget %>
+          </div>
+        <% end %>
         <div class="mt-2 flex items-center text-sm text-gray-300">
-          <%= inline_svg_tag "dollar.svg", class: "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500" %>
-          $120k – $140k
-        </div>
-        <div class="mt-2 flex items-center text-sm text-gray-300">
-          <%= inline_svg_tag "calendar.svg",
-          class: "mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500" %>
-          Closing on January 9, 2020
+          <span
+            class="
+              inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1
+              ring-inset <%= job_status_color(job.status) %>
+            "
+          >
+            <%= job.status.humanize %>
+          </span>
         </div>
       </div>
     </div>

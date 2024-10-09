@@ -6,6 +6,7 @@ class Job < ApplicationRecord
   validates :location, presence: true
   validates :status, presence: true
   validates :job_type, presence: true
+  validates :location_type, presence: true
 
   enum :status, {
     draft: "draft",
@@ -18,6 +19,12 @@ class Job < ApplicationRecord
     part_time: "part_time",
     contract: "contract",
     internship: "internship"
+  }
+
+  enum :location_type, {
+    remote: "remote",
+    hybrid: "hybrid",
+    on_site: "on_site"
   }
 
   has_rich_text :description

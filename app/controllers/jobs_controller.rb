@@ -66,7 +66,7 @@ class JobsController < ApplicationController
     end
 
     def job_params
-      params.expect(job: [ :title, :description, :location, :status, :job_type ])
+      params.expect(job: [ :title, :description, :location, :status, :job_type, :location_type, :salary_budget ])
     end
 
     def authorize_access

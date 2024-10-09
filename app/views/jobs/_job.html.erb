@@ -8,10 +8,12 @@
     <dl class="font-normal lg:hidden">
       <dt class="sr-only">Location</dt>
       <dd class="mt-1 truncate text-gray-300"><%= job.location %></dd>
+      <dt class="sr-only">Location Type</dt>
+      <dd class="mt-1 truncate text-gray-300"><%= job.location_type.dasherize.humanize %></dd>
       <dt class="sr-only">Job Type</dt>
-      <dd class="mt-1 truncate text-gray-300"><%= job.job_type.humanize %></dd>
-      <dt class="sr-only">Account</dt>
-      <dd class="mt-1 truncate text-gray-300"><%= job.account.name %></dd>
+      <dd class="mt-1 truncate text-gray-300"><%= job.job_type.dasherize.humanize %></dd>
+      <dt class="sr-only">Salary Budget</dt>
+      <dd class="mt-1 truncate text-gray-300"><%= job.salary_budget %></dd>
     </dl>
   </td>
   <td
@@ -23,12 +25,17 @@
     class="
       hidden whitespace-nowrap px-3 py-4 text-sm text-gray-300 lg:table-cell
     "
-  ><%= job.job_type.humanize %></td>
+  ><%= job.location_type.dasherize.humanize %></td>
   <td
     class="
       hidden whitespace-nowrap px-3 py-4 text-sm text-gray-300 lg:table-cell
     "
-  ><%= job.account.name %></td>
+  ><%= job.job_type.dasherize.humanize %></td>
+  <td
+    class="
+      hidden whitespace-nowrap px-3 py-4 text-sm text-gray-300 lg:table-cell
+    "
+  ><%= job.salary_budget %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
     <span
       class="
