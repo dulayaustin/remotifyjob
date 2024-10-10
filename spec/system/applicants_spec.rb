@@ -57,6 +57,18 @@ RSpec.describe "Applicants", type: :system do
         expect(page).to have_text("john.doe@example.com")
       end
 
+      it "got errors", js: true do
+        sign_in user
+        visit applicant_path(applicant)
+
+        click_button "Edit"
+        fill_in "First name", with: ""
+        fill_in "Last name", with: ""
+        fill_in "Email address", with: ""
+        click_button "Save"
+
+        expect(page).to have_content("can't be blank")
+      end
     end
 
     describe "deleting an applicant" do
