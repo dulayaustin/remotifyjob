@@ -1,0 +1,7 @@
+<%= render "shared/breadcrumbs",
+breadcrumbs: [
+  { title: "Applicants", path: applicants_path },
+  { title: @applicant.name, path: applicant_path(@applicant) },
+] %>
+
+<%= render "applicants/details", applicant: @applicant %>

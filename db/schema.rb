@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_09_142044) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_09_164008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,6 +58,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_09_142044) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "applicants", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email_address"
+    t.string "phone"
+    t.string "stage", default: "application", null: false
+    t.string "status", default: "active", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_applicants_on_email_address"
+    t.index ["job_id"], name: "index_applicants_on_job_id"
+    t.index ["stage"], name: "index_applicants_on_stage"
+    t.index ["status"], name: "index_applicants_on_status"
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "title"
@@ -97,6 +113,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_09_142044) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "applicants", "jobs"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "sessions", "users"
   add_foreign_key "users", "accounts"

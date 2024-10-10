@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "applicants", class: "flex flex-grow mt-4 space-x-6 overflow-auto" do %>
+  <% Applicant.stages.values&.each do |stage| %>
+    <div class="flex flex-col flex-shrink-0 w-72">
+      <div class="flex items-center flex-shrink-0 h-10 px-2">
+        <span class="block text-lg text-white font-semibold"><%= stage.to_s.humanize %></span>
+      </div>
+      <div
+        id="applicants_<%= stage %>"
+        class="h-full"
+        data-drag-target="list"
+        data-new-value="<%= stage.to_s %>"
+      >
+        <% grouped_applicants[stage]&.each do |applicant| %>
+          <%= render "applicants/card", applicant: applicant %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

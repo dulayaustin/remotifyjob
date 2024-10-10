@@ -1,9 +1,4 @@
 <div id="<%= dom_id job %>_detail">
-  <%= render "shared/breadcrumbs",
-  breadcrumbs: [
-    { title: "Jobs", path: jobs_path },
-    { title: job.title, path: job_path(job) },
-  ] %>
   <div class="mt-2 md:flex md:items-center md:justify-between">
     <div class="min-w-0 flex-1">
       <h2
@@ -58,7 +53,7 @@
       </span>
     </div>
   </div>
-  <div class="mt-10 md:flex md:items-center md:justify-between">
+  <div class="mt-8 md:flex md:items-center md:justify-between">
     <div class="text-white" %>
       <%= raw job.description %>
     </div>

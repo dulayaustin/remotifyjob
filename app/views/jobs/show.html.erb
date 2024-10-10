@@ -1,1 +1,6 @@
+<%= render "shared/breadcrumbs",
+breadcrumbs: [
+  { title: "Jobs", path: jobs_path },
+  { title: @job.title, path: job_path(@job) },
+] %>
 <%= render "jobs/details", job: @job %>
