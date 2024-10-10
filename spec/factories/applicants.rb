@@ -7,5 +7,6 @@ FactoryBot.define do
     email_address { Faker::Internet.unique.email }
     stage { "application" }
     status { "active" }
+    resume { File.new("#{Rails.root}/public/austin_dulay_resume.pdf") }
   end
 end

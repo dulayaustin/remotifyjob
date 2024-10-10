@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "validations" do
-    context "uniqueness of email address" do
+    context "for uniqueness of email address" do
       let!(:existing_user) { FactoryBot.create(:user, email_address: "test@example.com") }
 
       it { should validate_uniqueness_of(:email_address).case_insensitive }

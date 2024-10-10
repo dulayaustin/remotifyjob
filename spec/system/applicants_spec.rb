@@ -17,6 +17,7 @@ RSpec.describe "Applicants", type: :system do
           fill_in "Last name", with: "Doe"
           fill_in "Email address", with: "john.doe@example.com"
           select job.title, from: "applicant_job_id"
+          attach_file("applicant_resume", Rails.root + "public/austin_dulay_resume.pdf")
           click_button "Save"
 
           expect(page).to have_css("#applicants_container", text: "John Doe")

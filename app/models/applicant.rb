@@ -7,6 +7,7 @@ class Applicant < ApplicationRecord
   validates :last_name, presence: true
   validates :stage, presence: true
   validates :status, presence: true
+  validates_with ResumeValidator
 
   has_one_attached :resume
 
