@@ -1,10 +1,7 @@
-<p style="color: green"><%= notice %></p>
+<%= render "shared/breadcrumbs",
+breadcrumbs: [
+  { title: "Applicants", path: applicants_path },
+  { title: @applicant.name, path: applicant_path(@applicant) },
+] %>
 
-<%= render @applicant %>
-
-<div>
-  <%= link_to "Edit this applicant", edit_applicant_path(@applicant) %> |
-  <%= link_to "Back to applicants", applicants_path %>
-
-  <%= button_to "Destroy this applicant", @applicant, method: :delete %>
-</div>
+<%= render "applicants/details", applicant: @applicant %>
