@@ -23,6 +23,8 @@ class Applicant < ApplicationRecord
     inactive: "inactive"
   }
 
+  scope :within_account, ->(account_id) { where(jobs: { account_id: account_id }) }
+
   def name
     [ first_name, last_name ].join(" ")
   end

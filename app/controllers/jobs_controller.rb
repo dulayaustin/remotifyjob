@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   before_action :authorize_access, only: %i[ show ]
 
   def index
-    @jobs = Job.within_account(current_account)
+    @jobs = Job.within_account(current_account.id)
   end
 
   def show

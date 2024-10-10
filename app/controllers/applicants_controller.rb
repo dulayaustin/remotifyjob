@@ -2,7 +2,7 @@ class ApplicantsController < ApplicationController
   before_action :set_applicant, only: %i[ show edit update destroy ]
 
   def index
-    @applicants = Applicant.all
+    @grouped_applicants = Applicant.includes(:job).within_account(current_account.id).group_by(&:stage)
   end
 
   def show
@@ -21,7 +21,7 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       if @applicant.save
         format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend("applicants_container", partial: "applicants/applicant", locals: { applicant: @applicant })
+          render turbo_stream: turbo_stream.prepend("applicants_#{@applicant.stage}", partial: "applicants/card", locals: { applicant: @applicant })
         end
         format.html { redirect_to @applicant, notice: "Applicant was successfully created." }
       else

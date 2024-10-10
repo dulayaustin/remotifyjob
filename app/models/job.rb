@@ -30,5 +30,5 @@ class Job < ApplicationRecord
     on_site: "on_site"
   }
 
-  scope :within_account, ->(account) { where(jobs: { account_id: account.id }) }
+  scope :within_account, ->(account_id) { where(account_id: account_id) }
 end

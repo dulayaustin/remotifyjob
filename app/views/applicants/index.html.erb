@@ -18,11 +18,9 @@
   </div>
 </div>
 
-<div id="applicants_container">
-  <% @applicants.each do |applicant| %>
-    <%= render applicant %>
-    <p>
-      <%= link_to "Show this applicant", applicant %>
-    </p>
-  <% end %>
+<div
+  id="applicants_container"
+  class="mt-8 flex items-baseline justify-between px-10 md:px-6"
+>
+  <%= render "applicants/list", grouped_applicants: @grouped_applicants %>
 </div>
