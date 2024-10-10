@@ -56,6 +56,23 @@ RSpec.describe "Applicants", type: :system do
         expect(page).to have_text("John Doe")
         expect(page).to have_text("john.doe@example.com")
       end
+
+    end
+
+    describe "deleting an applicant" do
+      let!(:applicant) { FactoryBot.create(:applicant, job: job) }
+
+      it "is a success", js: true do
+        sign_in user
+        visit applicant_path(applicant)
+
+        expect {
+          click_link "Delete"
+          accept_alert
+
+          expect(page).to have_css("#flash-container", text: "Applicant was successfully destroyed.")
+        }.to change(job.applicants, :count).by(-1)
+      end
     end
   end
 end
