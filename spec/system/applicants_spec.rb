@@ -37,5 +37,25 @@ RSpec.describe "Applicants", type: :system do
         expect(page).to have_content("can't be blank")
       end
     end
+
+    describe "editing an applicant" do
+      let!(:applicant) { FactoryBot.create(:applicant, job: job) }
+
+      it "is a success", js: true do
+        sign_in user
+        visit applicant_path(applicant)
+
+        click_button "Edit"
+        fill_in "First name", with: "John"
+        fill_in "Last name", with: "Doe"
+        fill_in "Email address", with: "john.doe@example.com"
+        select job.title, from: "applicant_job_id"
+        attach_file("applicant_resume", Rails.root + "public/austin_dulay_resume.pdf")
+        click_button "Save"
+
+        expect(page).to have_text("John Doe")
+        expect(page).to have_text("john.doe@example.com")
+      end
+    end
   end
 end

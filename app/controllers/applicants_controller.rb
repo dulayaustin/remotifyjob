@@ -33,6 +33,9 @@ class ApplicantsController < ApplicationController
   def update
     respond_to do |format|
       if @applicant.update(applicant_params)
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("applicant_#{@applicant.id}_detail", partial: "applicants/details", locals: { applicant: @applicant })
+        end
         format.html { redirect_to @applicant, notice: "Applicant was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
