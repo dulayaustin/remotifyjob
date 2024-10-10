@@ -48,4 +48,18 @@
       </span>
     </div>
   </div>
+
+  <div class="mt-8 md:flex md:items-center md:justify-between">
+    <% if applicant.resume.attached? %>
+      <%= turbo_frame_tag "resume", src: applicant_resume_path(applicant), class: "w-full" do %>
+        <div
+          class="
+            w-full bg-gray-800 rounded flex justify-center items-center h-[1000px]
+          "
+        >
+          Loading...
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
