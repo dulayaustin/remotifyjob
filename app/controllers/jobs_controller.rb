@@ -1,10 +1,12 @@
 class JobsController < ApplicationController
+  include Filterable
+
   before_action :set_job, only: %i[ show edit update destroy ]
   before_action :ensure_frame_response, only: %i[ new edit ]
   before_action :authorize_access, only: %i[ show ]
 
   def index
-    @jobs = Job.within_account(current_account.id)
+    @jobs = filter!(Job).within_account(current_account.id)
   end
 
   def show

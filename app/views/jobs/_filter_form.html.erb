@@ -1,0 +1,54 @@
+<%= form_with(
+  url: jobs_path,
+  method: :get,
+  class: "flex items-baseline",
+  data: {
+    controller: "form",
+    form_target: "form",
+    turbo_frame: "jobs",
+    }
+  ) do |form| %>
+  <div class="form-group mr-2">
+    <%= form.label :sort, class: "sr-only" %>
+    <%= form.select :sort,
+                options_for_select(
+                  jobs_sort_options,
+                  fetch_filter_key(Job, current_user.id, "sort"),
+                ),
+                { disabled: "", prompt: "Sort by" },
+                {
+                  data: {
+                    action: "change->form#submit",
+                  },
+                  class:
+                    "block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black",
+                } %>
+  </div>
+  <div class="form-group mr-2">
+    <%= form.label :status, class: "sr-only" %>
+    <%= form.select :status,
+                options_for_select(
+                  jobs_status_filter_options,
+                  fetch_filter_key(Job, current_user.id, "status"),
+                ),
+                { include_blank: "All Statuses" },
+                {
+                  data: {
+                    action: "change->form#submit",
+                  },
+                  class:
+                    "block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black",
+                } %>
+  </div>
+  <div class="form-group mr-2">
+    <%= form.label :query, class: "sr-only" %>
+    <%= form.text_field :query,
+                    placeholder: "Search jobs",
+                    value: fetch_filter_key(Job, current_user.id, "query"),
+                    data: {
+                      action: "input->form#submit",
+                    },
+                    class:
+                      "block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black" %>
+  </div>
+<% end %>
