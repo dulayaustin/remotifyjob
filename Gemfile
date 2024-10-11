@@ -71,3 +71,5 @@ end
 
 gem "view_component"
 gem "inline_svg"
+gem "kredis"
+gem "pg_search"
