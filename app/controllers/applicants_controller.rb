@@ -1,7 +1,7 @@
 class ApplicantsController < ApplicationController
   include Filterable
 
-  before_action :set_applicant, only: %i[ show edit update destroy ]
+  before_action :set_applicant, only: %i[ show edit update destroy change_stage ]
 
   def index
     @grouped_applicants = filter!(Applicant).within_account(current_account.id).group_by(&:stage)
@@ -51,6 +51,11 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to applicants_path, status: :see_other, notice: "Applicant was successfully destroyed." }
     end
+  end
+
+  def change_stage
+    @applicant.update(applicant_params)
+    head :ok
   end
 
   private
