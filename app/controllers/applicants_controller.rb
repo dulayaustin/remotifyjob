@@ -1,8 +1,10 @@
 class ApplicantsController < ApplicationController
+  include Filterable
+
   before_action :set_applicant, only: %i[ show edit update destroy ]
 
   def index
-    @grouped_applicants = Applicant.includes(:job).within_account(current_account.id).group_by(&:stage)
+    @grouped_applicants = filter!(Applicant).within_account(current_account.id).group_by(&:stage)
   end
 
   def show

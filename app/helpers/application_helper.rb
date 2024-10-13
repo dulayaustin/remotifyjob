@@ -12,4 +12,8 @@ module ApplicationHelper
       alert: "bg-red-50 text-red-500 focus:ring-red-400 hover:bg-red-200 dark:text-red-400"
     }[flash_type.to_sym]
   end
+
+  def fetch_filter_key(resource, user_id, key)
+    Kredis.hash("#{resource.to_s.underscore}_filters:#{user_id}")[key]
+  end
 end

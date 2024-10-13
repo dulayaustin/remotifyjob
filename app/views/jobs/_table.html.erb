@@ -1,49 +1,45 @@
-<div class="mt-8 flow-root">
-  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-      <table class="min-w-full divide-y divide-gray-700">
-        <thead>
-          <tr>
-            <th
-              scope="col"
-              class="
-                py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0
-              "
-            >Title</th>
-            <th
-              scope="col"
-              class="
-                hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
-              "
-            >Location</th>
-            <th
-              scope="col"
-              class="
-                hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
-              "
-            >Location Type</th>
-            <th
-              scope="col"
-              class="
-                hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
-              "
-            >Job Type</th>
-            <th
-              scope="col"
-              class="
-                hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
-              "
-            >Salary Budget</th>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
-            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-              <span class="sr-only">Action Links</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody id="jobs_container" class="divide-y divide-gray-800">
-          <%= render jobs %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<%= turbo_frame_tag "jobs" do %>
+  <table class="min-w-full divide-y divide-gray-700">
+    <thead>
+      <tr>
+        <th
+          scope="col"
+          class="
+            py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0
+          "
+        >Title</th>
+        <th
+          scope="col"
+          class="
+            hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
+          "
+        >Location</th>
+        <th
+          scope="col"
+          class="
+            hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
+          "
+        >Location Type</th>
+        <th
+          scope="col"
+          class="
+            hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
+          "
+        >Job Type</th>
+        <th
+          scope="col"
+          class="
+            hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell
+          "
+        >Salary Budget</th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
+        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+          <span class="sr-only">Action Links</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody id="jobs_container" class="divide-y divide-gray-800">
+      <%= render jobs %>
+    </tbody>
+  </table>
+<% end %>
