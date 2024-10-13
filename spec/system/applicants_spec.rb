@@ -86,5 +86,21 @@ RSpec.describe "Applicants", type: :system do
         }.to change(job.applicants, :count).by(-1)
       end
     end
+
+    describe "drag and drop an applicant on stages" do
+      let!(:applicant) { FactoryBot.create(:applicant, job: job) }
+
+      it "must change from 'application' to 'interview' stage", js: true do
+        sign_in(user)
+        visit applicants_path
+
+        applicant_card = find("#applicants_application").find("#applicant_#{applicant.id}")
+        interview_list = find("#applicants_interview")
+        applicant_card.drag_to interview_list
+
+        expect(page).to_not have_css("#applicants_application", text: applicant.name)
+        expect(page).to have_css("#applicants_interview", text: applicant.name)
+      end
+   end
   end
 end

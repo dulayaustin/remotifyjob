@@ -19,5 +19,9 @@ Rails.application.routes.draw do
   resources :jobs
   resources :applicants do
     get "resume", to: "resumes#show"
+
+    member do
+      patch :change_stage
+    end
   end
 end
