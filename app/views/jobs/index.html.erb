@@ -14,7 +14,7 @@
       turbo_frame: "modal",
     },
     class:
-      "ml-3 inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" %>
+      "inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" %>
   </div>
 </div>
 
@@ -22,7 +22,7 @@
   <%= render "jobs/filter_form" %>
 </div>
 
-<div class="mt-8 flow-root">
+<div class="mt-4 flow-root">
   <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
       <%= render "jobs/table", jobs: @jobs %>
