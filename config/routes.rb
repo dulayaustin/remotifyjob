@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   get "dashboard", to: "dashboard#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -23,5 +25,7 @@ Rails.application.routes.draw do
     member do
       patch :change_stage
     end
+
+    resources :emails, only: [ :index, :new, :create, :show ]
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_09_164008) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_15_151729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -74,6 +74,18 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_09_164008) do
     t.index ["status"], name: "index_applicants_on_status"
   end
 
+  create_table "emails", force: :cascade do |t|
+    t.bigint "applicant_id", null: false
+    t.bigint "user_id", null: false
+    t.text "subject"
+    t.string "email_type", default: "outbound"
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["applicant_id"], name: "index_emails_on_applicant_id"
+    t.index ["user_id"], name: "index_emails_on_user_id"
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "title"
@@ -114,6 +126,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_09_164008) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "applicants", "jobs"
+  add_foreign_key "emails", "applicants"
+  add_foreign_key "emails", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "sessions", "users"
   add_foreign_key "users", "accounts"

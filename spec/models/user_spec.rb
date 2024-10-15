@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   describe "associations" do
     it { should belong_to(:account) }
     it { should have_many(:sessions).dependent(:destroy) }
+    it { should have_many(:emails).dependent(:destroy) }
 
     it { should accept_nested_attributes_for(:account) }
   end

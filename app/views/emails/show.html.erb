@@ -1,0 +1,40 @@
+<%= turbo_frame_tag "email" do %>
+  <div class=" lg:ml-2 lg:mt-0 mt-3 px-5 py-4 rounded shadow bg-gray-700 " %>
+    <div class="flex items-baseline justify-between text-sm text-gray-400 mb-6">
+      <div>
+        <% if @email.outbound? %>
+          <div>
+            From:
+            <span class="text-white">
+              <%= @user.name %>
+            </span>
+            <span class="text-nowrap">
+              <
+              <%= @user.email_address %>
+              >
+            </span>
+          </div>
+          <div>
+            To:
+            <span class="text-white">
+              <%= @applicant.name %>
+            </span>
+            <span class="text-nowrap">
+              <
+              <%= @applicant.email_address %>
+              >
+            </span>
+          </div>
+        <% else %>
+          For inbound
+        <% end %>
+      </div>
+      <div class="text-nowrap">
+        <%= localize(@email.created_at, format: :long) %>
+      </div>
+    </div>
+    <div class="text-white">
+      <%= @email.body %>
+    </div>
+  </div>
+<% end %>

@@ -13,6 +13,7 @@ class Applicant < ApplicationRecord
     }
 
   belongs_to :job
+  has_many :emails, dependent: :destroy
 
   validates :email_address, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates_uniqueness_of :email_address, scope: :job_id, case_sensitive: false

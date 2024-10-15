@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Applicant, type: :model do
   describe "associations" do
     it { should belong_to(:job) }
+    it { should have_many(:emails).dependent(:destroy) }
   end
 
   describe "validations" do

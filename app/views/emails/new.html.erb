@@ -1,0 +1,3 @@
+<%= render ModalComponent.new(title: "Email #{@applicant.name}") do %>
+  <%= render "form", email: @email, applicant: @applicant %>
+<% end %>
