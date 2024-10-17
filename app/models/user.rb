@@ -14,11 +14,20 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :password, presence: true
 
-  def email_alias
-    email_address.split("@").first
-  end
+  after_create_commit :generate_email_alias
 
   def name
     [ first_name, last_name ].join(" ")
   end
+
+  def internal_email_address
+    "reply-#{email_alias}@remotifyjob.com"
+  end
+
+  private
+
+    def generate_email_alias
+      email_alias = "#{email_address.split("@").first}-#{id}"
+      update_column(:email_alias, email_alias)
+    end
 end
