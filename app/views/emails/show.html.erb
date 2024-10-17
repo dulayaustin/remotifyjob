@@ -1,5 +1,9 @@
 <%= turbo_frame_tag "email" do %>
-  <div class=" lg:ml-2 lg:mt-0 mt-3 px-5 py-4 rounded shadow bg-gray-700 " %>
+  <div
+    id="<%= dom_id(@email) %>_body"
+    class="lg:ml-2 lg:mt-0 mt-3 px-5 py-4 rounded shadow bg-gray-700"
+    %
+  >
     <div class="flex items-baseline justify-between text-sm text-gray-400 mb-6">
       <div>
         <% if @email.outbound? %>
@@ -10,7 +14,7 @@
             </span>
             <span class="text-nowrap">
               <
-              <%= @user.email_address %>
+              <%= @user.internal_email_address %>
               >
             </span>
           </div>
@@ -26,7 +30,28 @@
             </span>
           </div>
         <% else %>
-          For inbound
+          <div>
+            From:
+            <span class="text-white">
+              <%= @applicant.name %>
+            </span>
+            <span class="text-nowrap">
+              <
+              <%= @applicant.email_address %>
+              >
+            </span>
+          </div>
+          <div>
+            To:
+            <span class="text-white">
+              <%= @user.name %>
+            </span>
+            <span class="text-nowrap">
+              <
+              <%= @user.internal_email_address %>
+              >
+            </span>
+          </div>
         <% end %>
       </div>
       <div class="text-nowrap">

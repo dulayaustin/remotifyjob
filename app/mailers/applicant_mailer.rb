@@ -6,7 +6,7 @@ class ApplicantMailer < ApplicationMailer
 
     mail(
       to: @applicant.email_address,
-      from: "reply-#{@user.email_alias}@remotifyjob.com",
+      from: @user.internal_email_address,
       subject: @email.subject
     )
   end
