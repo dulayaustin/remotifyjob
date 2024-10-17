@@ -1,0 +1,20 @@
+<div>
+  <%= link_to applicant_email_path(applicant, email),
+    data: {
+      turbo_frame: "email"
+    },
+    class: "block hover:bg-white/20 focus:bg-gray-700" do %>
+    <div class="p-2 flex items-center">
+      <div class="mr-2 text-gray-500">
+        <%= inline_svg_tag "#{email_type_icon(email.email_type)}.svg",
+        class: "h-6 w-6 inline-block" %>
+      </div>
+      <div>
+        <h4 class="text-lg text-white"><%= email.subject %></h4>
+        <div class="text-gray-300 text-sm">
+          <p><%= localize(email.created_at, format: :long) %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

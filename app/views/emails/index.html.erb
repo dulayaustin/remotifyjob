@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "emails" do %>
+  <div id="emails_list" class="divide-y divide-gray-500 mt-2">
+    <%= render @emails, applicant: @applicant %>
+  </div>
+<% end %>
