@@ -1,6 +1,6 @@
 <tr id="<%= dom_id job %>_row">
   <td class="py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0 ">
-    <%= link_to job.title, job_path(job) %>
+    <%= link_to job.title, job_path(job), data: { turbo: false } %>
     <dl class="font-normal lg:hidden">
       <dt class="sr-only">Location</dt>
       <dd class="mt-1 truncate text-gray-300"><%= job.location %></dd>
