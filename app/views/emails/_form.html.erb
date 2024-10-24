@@ -1,0 +1,55 @@
+<%= form_with model: [applicant, email], id: "email_form", class: "p-4 md:p-5" do |form| %>
+  <div class="space-y-12">
+    <div class="border-b border-white/10 pb-12">
+      <% if email.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(email.errors.count, "error") %>
+            prohibited this email from being saved:</h2>
+
+          <ul>
+            <% email.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="col-span-full">
+          <%= form.label :subject, class: "block text-sm font-medium leading-6 text-white" %>
+          <div class="mt-2">
+            <%= form.text_field :subject,
+                            class:
+                              "block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+
+        <div class="col-span-full">
+          <div class="mt-2">
+            <%= form.rich_text_area :body,
+                                class:
+                                  "block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 min-h-72 h-auto" %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+
+    <%= link_to "Cancel",
+    "#",
+    data: {
+      action: "modal#close",
+    },
+    class: "text-sm font-semibold leading-6 text-white" %>
+    <%= form.button class: "
+            rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm
+            hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2
+            focus-visible:outline-offset-2 focus-visible:outline-indigo-500" do %>
+      <span class="show-when-enabled">Send</span>
+      <span class="show-when-disabled">Sending...</span>
+    <% end %>
+  </div>
+<% end %>
